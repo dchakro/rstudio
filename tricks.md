@@ -1,4 +1,4 @@
-Tricks used to make the build work on mac.
+Tricks used to make the `rstudio-server` [build 1.4.1717](https://github.com/rstudio/rstudio/releases/tag/v1.4.1717) successfully build on MacOS catalina.
 
 
 
@@ -69,6 +69,25 @@ and add the full path of math.h (present in the SAME folder, but it isn’t foun
 ...
      [java]    [ERROR] Errors in 'org/rstudio/studio/client/RStudioGinjector.java'
      [java]       [ERROR] Line 346: Failed to resolve 'org.rstudio.studio.client.RStudioGinjector' via deferred binding
+```
+
+
+
+### Download and build yaml parser:
+
+Rstudio had the code set up but didn’t have a make target for `libyaml-cpp.a`, here’s how to fix it.
+
+```sh
+# Download and compile the parser
+curl -OJL https://github.com/jbeder/yaml-cpp/archive/refs/tags/yaml-cpp-0.6.3.tar.gz
+tar -xvf yaml-cpp-yaml-cpp-0.6.3.tar.gz && cd yaml-cpp-yaml-cpp-0.6.3
+make 
+make install
+
+# Link the library where rstudio expects it
+cd /opt/rstudio-tools/x86_64/yaml-cpp/0.6.3/build/
+sudo ln -s '/usr/local/lib/libyaml-cpp.a' ./libyaml-cpp.a
+
 ```
 
 
