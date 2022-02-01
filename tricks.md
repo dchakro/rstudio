@@ -92,6 +92,23 @@ sudo ln -s '/usr/local/lib/libyaml-cpp.a' ./libyaml-cpp.a
 
 
 
-### Correct installation
+### Correctly run the installation
 
 Finally become root and then run just `make install`, for some reason running `sudo make install` as either a normal nor a privilaged user seems to work.
+
+
+
+### Create a user for rstudio-server
+
+```sh
+dscl . -create /Users/rstudio-server
+dscl . -create /Users/rstudio-server UserShell /bin/zsh
+dscl . -create /Users/rstudio-server RealName "Rstudio Server" 
+dscl . -create /Users/rstudio-server UniqueID "510"
+dscl . -create /Users/rstudio-server PrimaryGroupID 20
+dscl . -create /Users/rstudio-server NFSHomeDirectory /Users/rstudio-server
+dscl . -passwd /Users/rstudio-server runrstudio 
+dscl . create /Users/rstudio-server IsHidden 1
+sudo reboot now
+```
+
