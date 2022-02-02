@@ -14,6 +14,11 @@
 # AGPL (http://www.gnu.org/licenses/agpl-3.0.txt) for more details.
 #
 
+# set(JAVA_HOME $ENV{JAVA_HOME})
+# set(JAVA_HOME "/Library/Java/JavaVirtualMachines/jdk-16.0.1.jdk/Contents/Home")
+find_package(Java)
+message(STATUS "JAVA_HOME: ${JAVA_HOME}")
+# message(STATUS "java: ${Java_JAVA_EXECUTABLE}")
 
 # include guard
 if(RSTUDIO_CMAKE_GLOBALS_INCLUDED)
