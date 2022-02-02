@@ -106,14 +106,16 @@ Finally become root and then run just `make install`, for some reason running `s
 cd ~/rstudio-server/rstudio/dependencies/osx
 ./install-dependencies-osx
 cd ~/rstudio-server/rstudio/src/cpp
-mkdir build_version
-cd build_version
+mkdir build_20210902
+cd build_20210902
 cmake .. -DRSTUDIO_TARGET=Server -GNinja
 ninja
 cd ~/rstudio-server/rstudio/src/gwt
 ./ant
-cd ~/rstudio-server/rstudio/src/cpp/build
+cd ~/rstudio-server/rstudio/src/cpp/build_20210902
+sudo codesign --force --deep --sign - server/rserver
 ./rserver-dev
+
 ```
 
 This method allows to build easily without the troubles of `make install`. Less headache.
